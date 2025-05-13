@@ -77,7 +77,7 @@ The `research/` directory contains extensive documentation on:
 
 ### Hardware Setup
 1. Assemble the hardware components according to the power diagram
-2. Install the diffraction grating film on the camera
+2. Install the diffraction grating lens on the camera
 3. Ensure proper voltage regulation setup
 4. Prepare the enclosure with proper insulation
 
