@@ -1,0 +1,6 @@
+filename, carbon, helium, hydrogen, nitrogen, oxygen
+carbon.jpg, 1, 0, 0, 0, 0
+helium.jpg, 0, 1, 0, 0, 0
+hydrogen.jpg, 0, 0, 1, 0, 0
+nitrogen.jpg, 0, 0, 0, 1, 0
+oxygen.jpg, 0, 0, 0, 0, 1
