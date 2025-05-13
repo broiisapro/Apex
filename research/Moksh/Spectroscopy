@@ -1,0 +1,151 @@
+## **I. What is Spectroscopy?**
+
+Spectroscopy is the study of how light interacts with matter. It allows us to understand the composition, structure, and properties of materials by examining how they absorb, emit, or scatter electromagnetic radiation.
+
+---
+
+## **II. Core Concepts of Spectroscopy**
+
+### 1. **Electromagnetic Radiation**
+
+Light is part of the **electromagnetic spectrum**, which includes:
+
+- **Gamma rays** (<0.01 nm)
+- **X-rays**
+- **Ultraviolet (UV)**
+- **Visible light** (400–700 nm)
+- **Infrared (IR)**
+- **Microwaves**
+- **Radio waves** (>1 mm)
+
+The key characteristics are:
+
+- **Wavelength (λ)**: Distance between wave peaks
+- **Frequency (ν)**: Number of wave cycles per second
+- **Energy (E)**: E=hνE = h \nu, where hh is Planck's constant
+
+---
+
+### 2. **Types of Interactions**
+
+Spectroscopy is based on interactions between light and atoms/molecules:
+
+| Type | What Happens | Used For |
+| --- | --- | --- |
+| **Absorption** | Material absorbs specific wavelengths | Composition analysis |
+| **Emission** | Excited atoms emit light at characteristic wavelengths | Identifying elements |
+| **Scattering** | Light is redirected in different directions | Molecular structure |
+| **Fluorescence** | Light is absorbed and re-emitted at longer wavelength | Bio-labeling |
+| **Raman** | Inelastic scattering provides vibrational info | Material ID |
+
+---
+
+### 3. **Quantum Mechanics Basics**
+
+- **Electrons** occupy discrete energy levels.
+- When atoms absorb energy, electrons move to higher levels.
+- When electrons return, energy is released as photons = **emission lines**.
+- Each element has a **unique spectral fingerprint**.
+
+---
+
+## **III. Types of Spectroscopy**
+
+### 1. **Atomic Spectroscopy**
+
+- Studies electron transitions in atoms.
+- Types: **Atomic Absorption (AAS)**, **Atomic Emission (AES)**, **Flame Tests**.
+
+### 2. **Molecular Spectroscopy**
+
+- Studies vibrations and rotations of molecules.
+- Types:
+    - **Infrared (IR)**: Functional group detection
+    - **Raman**: Bond strength and symmetry
+    - **UV-Vis**: Electronic transitions
+
+### 3. **Mass Spectrometry** *(not optical, but related)*
+
+- Measures mass-to-charge ratio of ions to determine molecular weight.
+
+### 4. **NMR Spectroscopy**
+
+- Uses magnetic fields to determine molecular structure.
+
+---
+
+## **IV. Instruments and Components**
+
+All spectrometers (even DIY ones) share core parts:
+
+| Component | Function |
+| --- | --- |
+| **Light Source** | Incandescent, LED, laser, or the Sun |
+| **Slit** | Narrows beam for better resolution |
+| **Collimator** | Lens to align rays parallel |
+| **Diffraction Grating / Prism** | Disperses light into spectrum |
+| **Detector** | Camera, photodiode, or CCD |
+| **Software** | Converts signal into usable spectrum |
+
+---
+
+## **V. Building a DIY Spectrometer**
+
+You’ve already got the plan for a **Raspberry Pi spectrometer**, but here’s a deeper understanding.
+
+### 1. **Light Source**
+
+The different light sources that we will be testing with:
+
+- **Sunlight**: Broad spectrum
+- **Fluorescent bulbs**: Sharp emission lines
+- **LEDs**: Discrete colors
+- **Lasers**: Monochromatic
+
+### 2. **Diffraction Grating**
+
+- Splits light into a spectrum by interference.
+- Can be:
+    - **CD/DVD** (cheap, less accurate)
+    - **Real grating** (e.g., 1000 lines/mm)
+
+### 3. **Slit and Optics**
+
+- Narrow slit ensures better spectral resolution.
+- Lenses can focus or collimate the beam.
+
+### 4. **Detector (Camera)**
+
+- Use Pi Camera or USB Webcam.
+- Higher resolution = better spectral detail.
+- Maybe create a spectral lens for a pocket camera, and set up auto capture for 0.5s, and set it in the box, and let it take pictures the entire way up.
+
+### 5. **Data Processing**
+
+- Use OpenCV or NumPy in Python to extract brightness vs. pixel position. We might switch to a different language later due to speed reasons(C).
+- Calibrate pixels to wavelengths using known emission lines (like from a fluorescent bulb).
+
+---
+
+## **VI. Spectral Calibration**
+
+To turn raw camera data into useful wavelengths:
+
+1. Use a known source (e.g., mercury or fluorescent light).
+2. Find known spectral peaks.
+3. Match pixel positions to those peaks.
+4. Use interpolation or curve fitting to build a pixel → wavelength map.
+
+---
+
+## **VII. Interpreting Spectra**
+
+Here’s what to look for:
+
+- **Sharp lines**: Elemental emission (e.g., sodium = 589 nm)
+- **Broad peaks**: Molecules (vibrational bands)
+- **Gaps**: Absorption lines (e.g., Fraunhofer lines in sunlight)
+
+Compare our captured spectrum with:
+
+- **NIST Atomic Spectra Database**

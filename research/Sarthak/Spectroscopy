@@ -1,0 +1,68 @@
+- https://www.youtube.com/watch?v=cMCzA9rqJy8
+    - What is light?
+        - An EM Wave
+        - Arranged to frequency: 1. Gamma 2. X Rays 3.  UV 4. Visible (very tiny) 5. IR 6. Micro 7. Radio(very big)
+        - Visible light: Wavelefngth range- 380 nm - 750nm
+            - Goes from V-I-B-G-Y-O-R, where violet has the smallest wavelength yet highest frequency, and red has the largest wavelength yet lowest frequency
+    - Light can:
+        - Be absorbed: Material increases in temperature. Then it is reemitted most likely
+        - Be transmitted: Passes straight through (very unlikely, some is transmitted, some is reflected, some is absorbed almost always)
+        - Be reflected: Anything visible is seen because it reflects light
+    - If we spread out light wavelengths (spectra), we can examine which ones are transmitted, which ones are emitted, which ones are absorbed
+    - For this, we need a **SPECTROSCOPE**
+        - Dispersion: Light being refracted through material, and then dispersed into its separate spectra
+        - Diffraction: Light interacts with a surface that spreads out the light
+            - Most commonly used for spectroscopy
+                - We use a diffraction grating for this
+    - SPECTROSCOPE:
+        - A tube with diffraction grating
+        - Spectrometer- look at each of the individual wavelengths
+            - Moving a scope around the spreading of the colours. (this is just what a spectrometer does in a NUTSHELL, its not what it actually does).
+            - Allows for the measurement of angles which can help determine the light’s wavelength
+
+        ![image.png](attachment:c51b7202-e724-49a8-9feb-e8cf47d0b44a:image.png)
+
+    - Example of a situation:
+        - We use a light source that gives of white light
+            - Light comes out
+            - Examine light with spectroscope/spectrometer (we will get an unblocked, continous spectrum of all wavelengths/spectra)
+
+        ![image.png](attachment:85ccac9e-6f0b-4132-87fe-dc199e11503c:image.png)
+
+        - IF the white light encounters a substance, the substance absorbs some of that light, and some is emitted
+            - So the spectrum would no longer be continuous
+            - Example where H2 is in front of spectrometer
+
+    ![image.png](attachment:40a92eab-6703-4631-bb69-b639847104c0:image.png)
+
+    - In this example, there are clearly 4 key solid wavelengths that are being blocked by the $H_2$ gas. This type of spectrum is an absorption spectrum, it shows what the hydrogen gas absorbs
+    - IF you look at the light that is emitted from the substance, in this case the hydrogen gas, you get an emission spectrum, which shows what it emits back:
+
+    ![image.png](attachment:bfeb2aa4-6bf2-4874-a5ff-d60aa63399f8:image.png)
+
+    - Essentially:
+
+    $$
+    λ_E + λ_A = λ_C
+    $$
+
+    - Where λ is the visible light spectrum, E is emitted, A is absorbed, and C is continuous
+    - Note: Only true conceptually, not mathematically
+
+    ![image.png](attachment:976cdeda-0a9c-43c7-b694-a011d989ad8a:image.png)
+
+    - Can use both emission and absorption spectrum for analyzing data
+    - Light spectra from the Sun:
+
+    ![image.png](attachment:9dcf9260-e32a-4561-b3ab-ff505f9bd2da:image.png)
+
+    - A light’s colour depends entirely on its emission spectrum
+    - HELIX NEBULA:
+
+    ![image.png](attachment:f3fb79a5-7335-4ad0-9a4d-4fb55102f846:image.png)
+
+    - A spectrometer analyzes the light that is coming through a diffraction grating
+    - The amount of diffraction that takes place is related to a few variables
+    - $dsinθ = mƛ$
+    - where d is the distance between individual slits of the diffraction grating
+        - 1000 line diffraction grating = 1000 lines per mm, therefore d = 10^-6 m

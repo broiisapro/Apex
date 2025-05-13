@@ -1,0 +1,166 @@
+---
+
+## **System Overview:**
+
+Power System  ->  Pi Zero 2 W  ->  Sensors (IMU, Camera)  ->  Data Logging (MicroSD)
+
+↓
+
+AI Stabilization Algorithm (onboard)
+
+---
+
+## **1. Power Management Flow:**
+
+### **Components:**
+
+- **Lithium Batteries (x2)** — likely Li-ion or LiPo.
+- **Voltage Regulator Module** — to step down ~7.4V (2x3.7V cells) to 5V for the Pi and peripherals.
+
+### **Flow:**
+
+Lithium Batteries (2x 3.7V in series/parallel)
+
+↓
+
+Voltage Regulator (output: 5V)
+
+↓
+
+Power Rail → Raspberry Pi Zero 2 W
+
+→ IMU (via I2C, 3.3V/5V)
+
+→ Camera Module (via CSI)
+
+---
+
+## **2. Camera Data Flow (Imaging + Spectroscopy):**
+
+### **Components:**
+
+- **Raspberry Pi Camera Module** (e.g., v2 HQ camera or v3 for better quality)
+- **Diffraction Grating Film** – physically mounted in front of the lens.
+
+### **Flow:**
+
+Pi Camera (CSI interface) + Diffraction Grating
+
+↓
+
+Raw Image / Video Feed (frames per second adjustable)
+
+↓
+
+[AI Stabilization Algorithm] → Stabilized Output
+
+↓
+
+MicroSD Card: Save as image/video files
+
+---
+
+## **3. IMU Data Flow (Orientation + Acceleration):**
+
+### **Components:**
+
+- **IMU (e.g., MPU6050, MPU9250, or BNO055)** — I2C or SPI interface.
+
+### **Flow:**
+
+IMU (Gyroscope + Accelerometer)
+
+↓
+
+Data Read via I2C/SPI (Python: `smbus` or `spidev`)
+
+↓
+
+Time-stamped Orientation Data (quaternions or Euler angles)
+
+↓
+
+MicroSD Card: Log to CSV/JSON file
+
+---
+
+## **4. MicroSD Card — Logging Architecture:**
+
+### **File Structure:**
+
+/data/
+
+├── imu_log.csv             ← timestamp, accel_x, accel_y, accel_z, gyro_x, ...
+
+├── stabilized_video.mp4    ← output from camera + AI
+
+├── raw_images/             ← optional: unstabilized frames
+
+└── meta_info.txt           ← e.g., start time, battery voltage logs, etc.
+
+### **Logging Software:**
+
+Use Python with:
+
+- OpenCV for image handling
+- smbus2 for IMU (or appropriate driver)
+- threading or asyncio to handle concurrent logging
+
+---
+
+## **5. AI Stabilization Algorithm (Software Pipeline):**
+
+### **Tools:**
+
+- **OpenCV** for optical flow, frame alignment
+- **Optional**: ML-based stabilization (e.g., motion estimation with DL models)
+
+### **Flow:**
+
+Raw Frame from Camera
+
+↓
+
+Feature Tracking + Motion Estimation
+
+↓
+
+Frame Correction (translation, rotation)
+
+↓
+
+Buffered Write → MicroSD as stabilized video or frame set
+
+---
+
+## **Software Flowchart**
+
+Start
+
+↓
+
+Initialize peripherals (IMU, Camera, Storage)
+
+↓
+
+Start threads:
+
+├─ IMU logger → CSV
+
+├─ Camera capture → Frame queue
+
+└─ Stabilizer → Process frames, save to video
+
+↓
+
+Monitor for shutdown signal / max time
+
+↓
+
+Gracefully close all files, stop logging
+
+↓
+
+End
+
+---
