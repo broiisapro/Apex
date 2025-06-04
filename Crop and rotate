@@ -1,0 +1,59 @@
+import numpy as np
+import cv2
+
+# Load image
+img = cv2.imread("C:/Users/User/Downloads/sample.png")
+if img is None:
+    raise FileNotFoundError("Check path!")
+
+# Convert to HSV
+hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+
+# Use a strong color mask to isolate colorful areas (not white/black/gray)
+mask = cv2.inRange(hsv, (0, 80, 80), (180, 255, 255))
+
+# Remove small noise
+kernel = np.ones((5, 5), np.uint8)
+mask = cv2.morphologyEx(mask, cv2.MORPH_OPEN, kernel)
+mask = cv2.morphologyEx(mask, cv2.MORPH_CLOSE, kernel)
+
+# Find contours
+contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+if not contours:
+    raise Exception("No colorful region found.")
+
+# Find the largest colorful contour
+max_contour = max(contours, key=cv2.contourArea)
+
+# Get min area rotated rect
+rect = cv2.minAreaRect(max_contour)
+(center_x, center_y), (width, height), angle = rect
+
+# Make sure width > height (force horizontal)
+if height > width:
+    width, height = height, width
+    angle += 90
+
+# Rotate image
+M = cv2.getRotationMatrix2D((center_x, center_y), angle, 1.0)
+rotated = cv2.warpAffine(img, M, (img.shape[1], img.shape[0]))
+
+# Crop the rectangle
+cropped = cv2.getRectSubPix(rotated, (int(width), int(height)), (center_x, center_y))
+
+# Resize and center
+target_h, target_w = 256, 256
+scale = min(target_w / cropped.shape[1], target_h / cropped.shape[0])
+resized = cv2.resize(cropped, (int(cropped.shape[1]*scale), int(cropped.shape[0]*scale)))
+
+# Center on black
+canvas = np.zeros((target_h, target_w, 3), dtype=np.uint8)
+x_offset = (target_w - resized.shape[1]) // 2
+y_offset = (target_h - resized.shape[0]) // 2
+canvas[y_offset:y_offset + resized.shape[0], x_offset:x_offset + resized.shape[1]] = resized
+
+# Save and show
+cv2.imwrite("output.png", canvas)
+cv2.imshow("Rainbow Rect", canvas)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
