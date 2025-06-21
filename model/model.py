@@ -10,8 +10,8 @@ from sklearn.model_selection import train_test_split
 IMAGE_DIR = 'images'
 CSV_PATH = 'labels.csv'
 IMG_SIZE = (224, 224)
-BATCH_SIZE = 32
-EPOCHS = 5
+BATCH_SIZE = 1
+EPOCHS = 10
 
 # csv file
 df = pd.read_csv(CSV_PATH)
